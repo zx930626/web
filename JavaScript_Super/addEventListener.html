@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.box{
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="box-out">
+		<div class="box">
+			<img src="../images/事件.png" onload="load()" alt="">
+		</div>
+	</div>
+	<script>
+		var box = document.getElementsByClassName('box')[0];
+		var box_out = document.getElementsByClassName('box-out')[0];
+		box.addEventListener('click',function(e){
+			// e.stopPropagation();
+			alert(11);
+		}, true)
+		box.addEventListener('click', function(){
+			alert(33);
+		}, true)
+		box_out.addEventListener('click', function(){
+			alert(22);
+		}, true)
+		box_out.addEventListener('click', function(){
+			alert(44);
+		}, false)
+		function load(){
+			alert('hasloaded')
+		}
+	</script>
+</body>
+</html>
+

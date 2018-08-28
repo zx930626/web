@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 300px;
+			height: 300px;
+			background: #666;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		
+	</div>
+	<script>
+		// 跨浏览器的处理程序
+		var EventUtil = {
+			addHandler: function(element,type,handler){
+				if (element.addEventListener){
+					element.addEventListener(type, handler, false);
+				}else if (element.attachEvent){
+					element.attachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = handler;
+				}
+			},
+			removeHandler: function(element,type,handler){
+				if (element.removeEventListener){
+					element.removeEventListener(type, handler, false);
+				}else if (element.detachEvent){
+					element.detachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = null;
+				}
+			},
+			// 跨浏览器的事件对象
+			getEvent: function(event){
+				return event ? event : window.event;
+			},
+			getTarget: function(event){
+				return event.target || event.srcElement;
+			},
+			preventDefault: (event) => {
+				if(event.preventDefault){
+					event.preventDefault();
+				}else{
+					event.returnValue = false;
+				}
+			},
+			stopPropagation : (event) => {
+				if (event.stopPropagation){
+					event.stopPropagation();
+				}else{
+					event.cancelBubble = true;
+				}
+			}
+		}
+
+
+		// 跨浏览器的事件对象
+
+
+		//IE8之前的版本和新浏览器的兼容性写法：
+		var div = document.querySelector('.box');
+		EventUtil.addHandler(div,'click',function(event){
+			event = EventUtil.getEvent(event);
+			var pageX = event.pageX,
+				pageY = event.pageY;
+			if (pageX === undefined){
+				pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+			}
+			if (pageY === undefined) {
+				pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+			}
+			console.log(pageX,pageY)
+		})
+
+		console.log(navigator)
+
+		// EventUtil.addHandler(window,'beforeunload',function(event){
+		// 	event = EventUtil.getEvent(event);
+		// 	var message = 'go go go';
+		// 	event.returnValue = message;
+		// 	return message
+		// })
+
+		EventUtil.addHandler(window,'load',function(){
+			var script = document.createElement('script');
+			EventUtil.addHandler(script,'readystatechange',function(event){
+				event = EventUtil.getEvent(event);
+				var target = EventUtil.getTarget(event);
+				console.log(target)
+				if (target.readyState == 'loaded' || target.readyState == 'complete'){
+					EventUtil.removeHandler(target,'readystatechange',arguments.callee)
+					alert('script loaded')
+				}
+			})
+			script.src = "../js/compat.js";
+			document.body.appendChild(script)
+		})
+
+
+		EventUtil.addHandler(window,'pageShow',function(event){
+			alert(111)
+		})
+
+		// var box = document.querySelector('.box');
+		// console.log(box);
+		// box.onclick = function (event) {
+		// 	console.log(event.clientX,event.clientY);
+		// 	console.log(event.pageX,event.pageY)
+		// }
+		// box.onmousewheel = function(){
+		// 	console.log(event.clientX,event.clientY);
+		// }
+	</script>
+</body>
+</html>
