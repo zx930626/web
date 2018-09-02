@@ -29,7 +29,7 @@
 						if (target.className.indexOf('dragable') > -1) {
 							dragging = target;
 							diffX = event.clientX - target.offsetLeft;
-							diifY = event.clientY - target.offsetTop;
+							diffY = event.clientY - target.offsetTop;
 							dragdrop.fire({type:'dragstart',target:dragging,x:event.clientX,y:event.clientY})
 						}
 					break;
