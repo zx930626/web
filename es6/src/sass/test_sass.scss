@@ -1,0 +1,75 @@
+$width:16px;
+.box{
+	border:1px solid red;
+	&:hover .active{
+		background: red;
+	}
+}
+span{
+	width:$width;
+}
+p{
+	$height: 19px !global;
+	height:$height;
+}
+div{
+	height:$height;
+}
+@mixin message($selector) {
+	body .box #{$selector} {
+		background: black;
+	}
+}
+@include message('span');
+.height{
+	height: (500px/2);
+	width: 10px + 600px/2px;
+}
+.wid{
+	$width: 122px;
+	$height:133px;
+	$color:rgba(0,0,0,0.5);
+	height:$width/$height;
+	background: rgba(155,248,199,0.5) + $color;
+	justify-content: space + -between;
+	&:before{
+		content:"Foo " + Bar;
+		justify-content: space + "-between";
+	}
+}
+$value:null;
+@import "example.scss";
+.inner{
+	height: 10px;
+}
+p:before{
+	content:i have a #{$value};
+	@import "example";
+}
+@media screen and (min-width:987px) {
+	.sidebar {
+		@media (max-width: 700px) {
+			height: 40px;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
