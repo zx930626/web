@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			background: #333;
+			color: white;
+			font-size: 20px;
+		}
+
+		div{
+			width: 150px;
+			height: 150px;
+			box-sizing: border-box;
+			float: left;
+			display: inline-block;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.txt{
+			position: absolute;
+		}
+		.top{
+			width: 30px;
+			height: 30px;
+left: 50%;
+    top: 0;
+transform: translateX(-50%);
+/* line-height: 150px; */
+		}
+		.bot{
+			width: 30px;
+			height: 30px;
+bottom: 0;
+transform: translateX(-50%);
+    left: 50%;
+    /* line-height: 150px; */
+		}
+		.lef{
+			width: 30px;
+			height: 30px;
+top: 50%;
+transform: translateY(-50%);
+    left: 0;
+    /* line-height: 150px; */
+		}
+		.rig{
+			width: 30px;
+			height: 30px;
+			right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    /* line-height: 150px; */
+		}
+		.second{
+			opacity: 0;
+		}
+		.outer{
+			width: 400px;
+			height: 400px;
+			margin-left: 50%;
+			transform: translateX(-50%);
+			margin-top:200px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+		.box{
+			width: 300px;
+			height: 300px;
+			position: relative;
+			transition: all linear 0.2s;
+			box-shadow: 0px 0px 0px 0 red;
+		}
+		.box.type1{
+			box-shadow: -6px -6px 2px 0 red;
+		}
+		.box.type2{
+			box-shadow: -6px 0 0 0 red;
+		}
+		.triangle{
+			border-top:150px solid white;
+			border-left: 150px solid white;
+			border-bottom: 150px solid transparent;
+			border-right: 150px solid transparent;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.triangle-right{
+			border-bottom:150px solid #999;
+			border-right: 150px solid #999;
+			border-top: 150px solid transparent;
+			border-left: 150px solid transparent;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		.triangle_small{
+			border-top:150px solid transparent;
+			border-left: 150px solid white;
+			border-bottom: 150px solid transparent;
+			border-right: 150px solid transparent;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.triangle_small-right{
+			border-bottom:150px solid transparent;
+			border-right: 150px solid transparent;
+			border-top: 150px solid #666;
+			border-left: 150px solid transparent;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			/* transform: rotate3d(1, 1, 50, 180deg); */
+				/* -webkit-transform: rotate3d(1, 1, 50, 180deg) ; */
+		}
+		.move{
+			animation:mymove 3s infinite;
+			-moz-animation:mymove 3s infinite; /* Firefox */
+			-webkit-animation:mymove 3s infinite; /* Safari and Chrome */
+			-o-animation:mymove 3s infinite; /* Opera */
+		}
+		.second_move{
+			animation:mymove2 3s infinite;
+			-moz-animation:mymove2 3s infinite; /* Firefox */
+			-webkit-animation:mymove2 3s infinite; /* Safari and Chrome */
+			-o-animation:mymove2 3s infinite; /* Opera */
+		}
+		.after{
+			transform: rotate3d(1, 1, 50, 180deg);
+				-webkit-transform: rotate3d(1, 1, 50, 180deg) ;
+		}
+		.second_after{
+			transform: rotate3d(1, 1, 0, 180deg);
+				-webkit-transform: rotate3d(1, 1, 0, 180deg) ;
+		}
+		@keyframes mymove{
+			0% {
+				transform: rotate3d(1, 1, 0, 180deg);
+				-webkit-transform: rotate3d(1, 1, 0, 180deg) ;
+			}
+			60% {
+				transform: rotate3d(1, 1, 3, 180deg);
+				-webkit-transform: rotate3d(1, 1, 3, 180deg) ;
+			}
+			100% {
+				transform: rotate3d(1, 1, 50, 180deg);
+				-webkit-transform: rotate3d(1, 1, 50, 180deg) ;
+			}
+		}
+		@keyframes mymove2{
+			0% {
+				transform: rotate3d(1, 1, 0, 0deg);
+				-webkit-transform: rotate3d(1, 1, 0, 0deg) ;
+			}
+			50% {
+				transform: rotate3d(1, 1, 0, 90deg);
+				-webkit-transform: rotate3d(1, 1, 0, 90deg) ;
+			}
+			100% {
+				transform: rotate3d(1, 1, 0, 180deg);
+				-webkit-transform: rotate3d(1, 1, 0, 180deg) ;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="outer">
+		<div class="txt top">上</div>
+		<div class="txt bot">下</div>
+		<div class="txt lef">左</div>
+		<div class="txt rig">右</div>
+		<div class="box">
+			<div class="triangle first"></div>
+			<div class="triangle-right first"></div>
+			<div class="triangle_small second"></div>
+			<div class="triangle_small-right second"></div>
+		</div>
+	</div>
+	
+	
+	<!-- <button onclick="zhe()">confirm</button> -->
+	<script>
+		// window.onload = function() {
+
+
+			var box = document.getElementsByClassName("box")[0];
+			var angle = document.getElementsByClassName("triangle-right")[0];
+			var angle2 = document.getElementsByClassName("triangle_small-right")[0];
+			var first = document.querySelectorAll(".first");
+			var second = document.querySelectorAll(".second");
+			var i = 0;
+			// var timer = setInterval(function() {
+			// 	if (i < 4) {
+			// 		i += 0.01
+			// 	}else if (i < 50 && i > 4){
+			// 		i += 0.1
+			// 	}else if {
+
+			// 	}else{
+			// 		box.className = "box type1";
+			// 		clearInterval(timer)
+			// 	}
+				
+			// 	angle.style.webkitTransform = "rotate3d(1, 1, "+ i +", 180deg)"
+			//},10)
+
+			function zhe() {
+				
+				angle.className = "triangle-right move";
+				setTimeout(function(){
+					angle.className = "triangle-right after";
+					box.className = "box type1";
+				},3000)
+			}
+			function zhe2() {
+				box.className = "box";
+				Array.prototype.forEach.call(first,function(item){
+					item.style.opacity = '0'
+				})
+				Array.prototype.forEach.call(second,function(item){
+					item.style.opacity = '1'
+				})
+				angle2.className = "triangle_small-right second_move";
+				setTimeout(function(){
+					angle2.className = "triangle_small-right second_after";
+					box.className = "box type2";
+				},3000)
+			}
+			document.addEventListener('click', function() {
+				zhe()
+				setTimeout(function(){
+ 					zhe2()
+				}, 5000)
+			})
+		//}
+	</script>
+</body>
+</html>

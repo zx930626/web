@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="http://wzhb.hebei.com.cn/wz/Public/zui/js/jquery.js"></script>
+    <script src="../js/smartCity_sdk1.js"></script>
+    <script>
+    	if (!window.WebViewJavascriptBridge){
+    		alert('在客户端打开')
+    	}
+    	console.log(SmartCity.getSystemInfo)
+        SmartCity.getSystemInfo(function( res ) {
+        	console.log(res);
+            if (res) {
+                alert("在客户端打开");
+            }else{
+                alert("没有在客户端打开");
+            }
+        });
+        SmartCity.getUserInfo(function( res ) {
+        	console.log(res);
+            if (res) {
+                alert("在客户端打开");
+            }else{
+                alert("没有在客户端打开");
+            }
+        });
+    </script>
+</head>
+<body>
+	
+</body>
+</html>

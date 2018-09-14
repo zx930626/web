@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>折纸动画</title>
+	<link rel="stylesheet" href="">
+	<style>
+		body{
+			background: #666;
+		}
+		canvas{
+			background: #666;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<canvas id="cvs" width="800" height="500"></canvas>
+		<button onclick="fn()">confirm</button>
+	</div>
+	<script>
+		var cvs = document.getElementById("cvs");
+		var ctx = cvs.getContext('2d');
+
+		function fn() {
+			ctx.clearRect(0,0,cvs.width,cvs.height)
+			// ctx.begin();
+			ctx.fillStyle = "white";
+			ctx.shadowColor = "black";
+			ctx.shadowOffsetX = 5;
+			// ctx.shadowOffsetY = 5;
+			ctx.shadowBlur = "5";
+			ctx.fillRect(10,10,300,150);
+			// ctv.end();
+
+
+
+
+			ctx.fillRect(10,160,300,150);
+
+
+
+
+
+
+		}
+		
+
+
+
+
+
+
+	</script>
+</body>
+</html>
