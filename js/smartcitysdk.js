@@ -32,23 +32,24 @@
 				if (window.WebViewJavascriptBridge) {
 					cb(WebViewJavascriptBridge);
 				}else{
-					console.log(111)
 					document.addEventListener('WebViewJavascriptBridgeReady', function() {
-						console.log(333)
 						cb(WebViewJavascriptBridge);
 					}, false);
 				}
+				setTimeout(function(){
+                	if (!window.WebViewJavascriptBridge) {
+                		alert('客户端版本过低,请升级客户端');
+                	}
+                },3000);
 			},
 
 			callApiCenter : function( api, param , callback ){
 				var mbldevice = utils.getMobileDevice();
-				console.log(mbldevice)
 					utils.connectWebViewJavascriptBridge(function( bridge ){
 						if (!_bridgeInit) {
 	                          bridge.init(function(message, responseCallback) {});
 	                          _bridgeInit = true;
 	                      }
-	                      console.log(bridge)
 						bridge.callHandler( api, param, function(response) {
 							response = typeof response == 'string' ? JSON.parse( response ) : response;
 							$.isFunction( callback ) && callback( response );
@@ -119,14 +120,28 @@
         },
         getRequestHeader : function( callback ){
 			return this.callApiCenter( 'getRequestHeader' , null , callback );					/*header加密信息*/
-		},	
+		},
 		goVRPlayer : function( param ){															/*vr播放器*/
 			return this.callApiCenter( 'goVRPlayer' , param , null );
 		},
-		showCommentInput : function( param ) {
-			return this.callApiCenter( 'showCommentInput' , param , null );
-		}
-	});
+        pageGetData : function( param , callback ){															/*pageGetData*/
+            return this.callApiCenter( 'pageGetData' , param , callback );
+        },
+
+        pageFinishWebviewRander : function(){
+             /*pageFinishWebviewRander*/
+             return this.callApiCenter( 'pageFinishWebviewRander' , null , null );
+        },
+
+        finishLoadMoreData : function( param ){
+             /*pageFinishWebviewRander*/
+            return this.callApiCenter( 'finishLoadMoreData' , param , null );
+	},
+	  loadImageResources : function( param , callback ){
+	     /*loadImageResources*/
+	     return this.callApiCenter( 'loadImageResources' , param , callback );
+	},
+	} );
 
 	window.SmartCity = new Plugin();
 
@@ -145,58 +160,12 @@
 	window.getRequestHeader = function( json ){
 		Plugin.prototype.getClient.call( SmartCity, 'getRequestHeader', json );
 	};
+    window.pageGetData = function( json , callback ){
+        Plugin.prototype.getClient.call( SmartCity, 'pageGetData', json , callback );
+	};
+	window.loadImageResources = function( json , callback ){
+          Plugin.prototype.getClient.call( SmartCity, 'loadImageResources', json , callback );
+  	};
+
 
 })();
-
-
-
-/*
-			demo:
-			页面引入当前js
-
-			在自己js方法里面调用
-
-			如：
-
-			SmartCity.getUserInfo(function( res ){															//获取用户信息:
-					//	res为用户信息
-					if( res && res.userinfo.userTokenKey ){
-							//  即用户已登录
-					}else{
-							//  即用户未登录  跳登录页登录
- 							SmartCity.goLogin();
-					}
-			});
-
-
-			SmartCity.getMd5(function( res ){
-
-			})
-
-			SmartCity.getSystemInfo(function( res ){
-					//	res为设备信息  如：device_token等
-			});
-
-			SmartCity.getLocation(function( res ){
-					//	res为定位信息    确保定位开启
-			});
-
-			SmartCity.goLogin();    																	//去登录
-
-			SmartCity.goUcenter();    																//去用户中心
-
-			SmartCity.linkTo({innerLink:'news#123'})                  //  innerLink :   模块标识＃内容id  例：文稿 123
-
-			SmartCity.goBack();     //返回上一步
-
-			SmartCity.shareTo({																				//分享
-				title: 标题,
-				brief: 描述,
-				contentURL: 内容链接,
-				imageLink: 图片链接
-			});
-
-			SmartCity.openHardwareSpeed();
-
-			SmartCity.goVRPlayer({'VRPlayURL' : 'http://live8.cgangs.com/hls/test/index.m3u8'});
-*/

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>console</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="name">
+		<p>za</p>
+		<p>1223</p>
+	</div>
+	<script>
+		console.group("信息提示");
+		console.log("信息");
+		console.info("信息");
+		console.error("报错");
+		console.warn("警示");
+		console.groupEnd();
+
+		console.group("点位符");
+		console.log("%s","111");
+		console.log("%d","aa");
+		console.log("%o","111")
+		console.groupEnd();
+
+
+		console.group("将对象以树状结构展现");
+		var info = {
+			name:'zx',
+			age:25
+		}
+		console.dir(info);
+		console.groupEnd();
+
+
+		console.group("显示节点");
+		var dom = document.getElementById("name");
+		console.dirxml(dom);
+		console.log(dom);
+		console.groupEnd();
+
+
+		console.group("判断变量是否为假");
+		var test = false;
+		console.assert(test);
+		var test1 = true;
+		console.assert(test1);
+		console.groupEnd();
+
+		console.group("计时功能");
+		console.time("计时");
+		for (var i = 0;i < 10000;i++) {
+			for (var j = 0;j < 10000;j++) {}
+		}
+		console.timeEnd("计时")
+		console.groupEnd();
+
+
+		console.group("统计次数");
+		function fn(){
+			console.count("被执行次数");
+		}
+		fn();
+		fn();
+		fn();
+		fn();
+		console.groupEnd();
+
+		console.group("表格展示");
+		var arr = [
+			{
+				name:'zx',
+				age:25
+			},
+			{
+				name:'fx',
+				age:26
+			}
+		];
+		console.table(arr)
+		console.groupEnd()
+
+
+		console.group("控制台输出文字,图片,以%c开头");
+		console.log("请注明%c 来源","font-size:20px;color:red;font-weight:bolder;");
+		console.log("图片%c",'background:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536902833300&di=50a28083624dcf65a603755bfca3a23e&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F4034970a304e251facb1a0d4aa86c9177f3e5353.jpg) no-repeat;')
+		console.groupEnd();
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
